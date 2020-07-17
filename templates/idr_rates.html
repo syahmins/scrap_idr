@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <p />
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Tanggal</th>
+            <th>Kode Mata Uang</th>
+            <th>Nama Mata Uang</th>
+            <th>Nilai Tukar</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for rate in rates|sort(attribute='code') %}
+          <tr>
+            <td>{{ rate['date'] }}</td>
+            <td>{{ rate['code'] }}</td>
+            <td>{{ rate['name'] }}</td>
+            <!-- <td>{{ rate['inverseRate']|round|int }}</td> -->
+            <td>{{ "Rp.{:,.2f}".format(rate['inverseRate']|round|int) }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}
